@@ -17,6 +17,11 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body class="bg-warning"> {% block body %}{% endblock %}
-		</body>
-	</html>
+	<body>
+		<header class="bg-info text-center h4 text-white py-2">
+			E-COMMERCE
+		</header>
+		{% block body %}{% endblock %}
+
+	</body>
+</html>
