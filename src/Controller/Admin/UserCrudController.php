@@ -5,9 +5,11 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -21,11 +23,11 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             NumberField::new('id')->hideOnForm(),
-            TextField::new('nom'),
+            TextField::new('nom', 'Nom d\'utilisateur'),
             EmailField::new('email'),
-            Password::new('email'),
-            DateField::new('createdAt')->setFormat('dd.MMMM.yyyy'),
-            DateField::new('updatedAt')->setFormat('dd.MMMM.yyyy')->hideOnForm(),
+            ArrayField::new('roles', 'User Role'),
+            TextField::new('password'),
+            DateField::new('createdAt')->hideOnForm()
         ];
     }
 }
