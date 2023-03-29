@@ -13,6 +13,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -30,8 +32,9 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('sousTitre'),
             SlugField::new('slug')->setTargetFieldName('nom'),
             MoneyField::new('prix')->setCurrency('EUR'),
-            TextField::new('image'),
-            DateField::new('createdAt')->setFormat('dd.MMMM.yyyy'),
+            TextField::new('imageFile')->setFormType(VichImageType::class)->onlyOnForms(),
+            ImageField::new('image')->setBasePath('/uploads/images/products')->onlyOnIndex(),
+            DateField::new('createdAt')->setFormat('dd.MMMM.yyyy')->hideOnForm(),
             AssociationField::new('category'),
             BooleanField::new('online')->renderAsSwitch(true),
             DateField::new('updatedAt')->setFormat('dd.MMMM.yyyy')->hideOnForm(),
