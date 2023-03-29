@@ -9,6 +9,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class CategoryFixtures extends Fixture
 {
+
+
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
