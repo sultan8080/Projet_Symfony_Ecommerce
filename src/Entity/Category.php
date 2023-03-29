@@ -20,6 +20,10 @@ class Category
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
+    public function __toString()
+    {
+        return $this->nom;
+    }
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
