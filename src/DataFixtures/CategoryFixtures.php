@@ -9,8 +9,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class CategoryFixtures extends Fixture
 {
-
-
     public function load(ObjectManager $manager): void
     {
 
@@ -43,20 +41,6 @@ class CategoryFixtures extends Fixture
             $manager->persist($category);
             $this->addReference('category-' . $key, $category);
         }
-
-        // $faker = Faker\Factory::create('fr_FR');
-        // $category = new Category();
-        // $category->setNom($faker->word());
-        // $manager->persist($category);
-
-
-        // $category1 = new Category();
-        // $category1->setNom($faker->word());
-        // $manager->persist($category1);
-
-        // $this->addReference('category', $category);
-        // $this->addReference('category1', $category1);
-
         $manager->flush();
     }
 }
