@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\Category;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 // #[Route('/')]
 class ProductController extends AbstractController
@@ -74,5 +76,19 @@ class ProductController extends AbstractController
         }
 
         return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/product/category/{id}', name: 'show_product_by_category', methods: ['GET'])]
+    public function showProducts(ManagerRegistry $doctrine, int $id): Response
+    {
+
+        $category = $doctrine->getRepository(Category::class)->find($id);
+
+        return $this->render('product/index.html.twig', [
+            'products' => $category->getProducts(),
+        ]);
+
+        // ...
     }
 }
