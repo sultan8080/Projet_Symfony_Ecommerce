@@ -21,8 +21,8 @@
 						<div class="card-body">
 							<h5 class="card-title fw-bolder">{{ product.nom }}</h5>
 							<p class="card-text fw-bolder text-danger">{{ product.Prix }}</p>
-							<a href="#" class="btn btn-sm btn-danger">Découvrez</a>
-							<a href="#" class="btn btn-sm btn-info">Ajouter au Panier</a>
+							<a href="{{path('app_product_show', {'id': product.id} )}}" class="btn btn-sm btn-outline-danger">Découvrez</a>
+							<a href="#" class="btn btn-sm btn-outline-info">Ajouter au Panier</a>
 						</div>
 					</div>
 				</div>
