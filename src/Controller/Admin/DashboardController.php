@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\Admin\CategoryCrudController;
 use App\Entity\Product;
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -25,7 +26,7 @@ class DashboardController extends AbstractDashboardController
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(CategoryCrudController::class)->generateUrl());
+        return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //
@@ -42,15 +43,29 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('E COMMERCE');
+            ->setTitle('E-COMMERCE');
     }
 
     public function configureMenuItems(): iterable
     {
         // yield MenuItem::linkToDashboard('User', 'fa fa-home');
+        // yield MenuItem::linkToCrud('Product', 'fa-solid fa-basket-shopping', Product::class);
 
-        yield MenuItem::linkToCrud('Product', 'fa-solid fa-basket-shopping', Product::class);
-        yield MenuItem::linkToCrud('Category', 'fa-solid fa-shop', Category::class);
-        yield MenuItem::linkToCrud('User', 'fa-solid fa-users', User::class);
+        yield MenuItem::section('User');
+        yield MenuItem::linkToCrud('All User', 'fa-solid fa-users', User::class);
+
+        yield MenuItem::section('Product');
+
+        yield MenuItem::subMenu('Product', 'fa-solid fa-basket-shopping')->setSubItems([
+            MenuItem::linkToCrud('Add Product', 'fas fa-plus', Product::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Product', 'fas fa-eye', Product::class)
+        ]);
+
+        yield MenuItem::section('Category');
+
+        yield MenuItem::subMenu('Category', 'fa-solid fa-shop')->setSubItems([
+            MenuItem::linkToCrud('Add Category', 'fas fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Category', 'fas fa-eye', Category::class)
+        ]);
     }
 }
