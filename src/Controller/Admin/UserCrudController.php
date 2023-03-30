@@ -25,6 +25,24 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->remove(Crud::PAGE_INDEX, Action::NEW)
+            ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
+                return $action->setIcon('fa fa-edit')->addCssClass('btn btn-warning')->setLabel(false);
+            })
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
+                return $action->setIcon('fa fa-trash')->addCssClass('btn btn-danger text-white')->setLabel(false);
+            });
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            // ...
+            ->showEntityActionsInlined();
+    }
 
     public function configureFields(string $pageName): iterable
     {
@@ -33,9 +51,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('nom', 'Nom d\'utilisateur'),
             EmailField::new('email'),
             ArrayField::new('roles', 'User Role'),
-            TextField::new('password'),
-            TextField::new('password')->setFormType(PasswordType::class)->setRequired($pageName === Crud::PAGE_NEW)
-                ->onlyOnForms(),
+            // TextField::new('password')->setFormType(PasswordType::class)->setRequired($pageName === Crud::PAGE_NEW)->onlyOnForms()
         ];
     }
 }
