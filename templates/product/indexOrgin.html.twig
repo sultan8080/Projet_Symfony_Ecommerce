@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center">
+			All Product List</h1>
+
+
+		{% for product in products %}
+
+
+			<div class="card" style="width: 18rem;">
+				<img src="{{ product.image }}" class="card-img-top" alt="Product Photo">
+				<div class="card-body">
+					<h5 class="card-title">{{ product.nom }}</h5>
+					<h6 class="card-subtitle mb-2 text-muted">{{ product.sousTitre }}</h6>
+
+					<p class="card-text fw-bold">{{ product.Prix }}</p>
+					<a href="#" class="btn btn-info text-white">Ajouter au panier</a>
+				</div>
+			</div>
+
+			<tr>
+				<td>{{ product.id }}</td>
+				<td>{{ product.nom }}</td>
+				<td>{{ product.Prix }}</td>
+				<td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+				<td>{{ product.slug }}</td>
+				<td>{{ product.image }}</td>
+				<td>{{ product.online ? 'Yes' : 'No' }}</td>
+				<td>{{ product.description }}</td>
+				<td>{{ product.sousTitre }}</td>
+				{# <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
+				{# <td>
+																																																																			<a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
+																																																																			<a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+																																																																		</td> #}
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="11">no records found</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{# <a href="{{ path('app_product_new') }}">Create new</a> #}</div>{% endblock %}
