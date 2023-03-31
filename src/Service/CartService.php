@@ -2,21 +2,22 @@
 
 namespace App\Service;
 
+use App\Entity\Product;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CartService
 {
     private $requestStack;
-    public function __construct(RequestStack $requestStack)
+    private EntityManagerInterface $em;
+    public function __construct(RequestStack $requestStack, EntityManagerInterface $em)
     {
         $this->requestStack = $requestStack;
+        $this->em = $em;
     }
 
-    private function getSession(): SessionInterface
-    {
-        return $this->requestStack->getSession();
-    }
+
 
     public function addToCart(int $id): void
     {
@@ -28,5 +29,28 @@ class CartService
         }
 
         $this->getSession()->set('cart', $card);
+    }
+    public function getTotal(): array
+    {
+        $cart = $this->getSession()->get('cart');
+        $product =
+            $cartData = [];
+        foreach ($cart as $id => $quantity) {
+            $product = $this->em->getRepository(Product::class)->findOneBY(['id' => $id]);
+            if (!$product) {
+                echo "fsdqf";
+            }
+            $cartData[] = [
+                'product' => $product,
+                'quantity' => $quantity
+
+            ];
+        }
+        return $cartData;
+    }
+
+    private function getSession(): SessionInterface
+    {
+        return $this->requestStack->getSession();
     }
 }
