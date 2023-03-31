@@ -82,7 +82,7 @@ class ProductController extends AbstractController
 
 
     #[Route('/product/category/{id}', name: 'show_product_by_category', methods: ['GET'])]
-    public function showProducts(ManagerRegistry $doctrine, int $id, Category $category, CategoryRepository $categoryRepository): Response
+    public function showProducts(ManagerRegistry $doctrine, int $id, CategoryRepository $categoryRepository): Response
     {
 
         $category = $doctrine->getRepository(Category::class)->find($id);
