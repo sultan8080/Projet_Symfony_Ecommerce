@@ -30,21 +30,29 @@ class CartService
 
         $this->getSession()->set('cart', $card);
     }
+
+    public  function removeCart()
+    {
+        return $this->getSession()->remove('cart');
+    }
+
     public function getTotal(): array
     {
         $cart = $this->getSession()->get('cart');
-        $product =
-            $cartData = [];
-        foreach ($cart as $id => $quantity) {
-            $product = $this->em->getRepository(Product::class)->findOneBY(['id' => $id]);
-            if (!$product) {
-                echo "fsdqf";
-            }
-            $cartData[] = [
-                'product' => $product,
-                'quantity' => $quantity
 
-            ];
+        $cartData = [];
+        if ($cart) {
+            foreach ($cart as $id => $quantity) {
+                $product = $this->em->getRepository(Product::class)->findOneBY(['id' => $id]);
+                if (!$product) {
+                    echo "fsdqf";
+                }
+                $cartData[] = [
+                    'product' => $product,
+                    'quantity' => $quantity
+
+                ];
+            }
         }
         return $cartData;
     }

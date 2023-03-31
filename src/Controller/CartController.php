@@ -25,4 +25,12 @@ class CartController extends AbstractController
         $cartService->addToCart($id);
         return $this->redirectToRoute("panier_card");
     }
+
+
+    #[Route('/mon-panier/vide', name: 'mon_panier_supprimmer')]
+    public function addToRouteSupprimer(CartService $cartService): Response
+    {
+        $cartService->removeCart();
+        return $this->redirectToRoute("panier_card");
+    }
 }
