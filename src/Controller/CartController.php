@@ -20,14 +20,21 @@ class CartController extends AbstractController
     }
 
     #[Route('/mon-panier/{id<\d+>}', name: 'mon_panier')]
-    public function addToRoute(CartService $cartService, int $id): Response
+    public function addItem(CartService $cartService, int $id): Response
     {
         $cartService->addToCart($id);
         return $this->redirectToRoute("panier_card");
     }
 
+    #[Route('/mon-panier/remove{id<\d+>}', name: 'remove_item')]
+    public function removeItem(CartService $cartService, int $id): Response
+    {
+        $cartService->removeFromCart($id);
+        return $this->redirectToRoute("panier_card");
+    }
 
-    #[Route('/mon-panier/vide', name: 'mon_panier_supprimmer')]
+
+    #[Route('/mon-panier/vide', name: 'panier_vide')]
     public function addToRouteSupprimer(CartService $cartService): Response
     {
         $cartService->removeCart();

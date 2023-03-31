@@ -28,7 +28,7 @@
 											<p class="lead fw-normal mb-2">{{item.product.nom}}</p>
 											<p>
 												{# <span class="text-muted">{{item.product.sousTitre}}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									</span> #}
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	</span> #}
 												<span class="text-muted">Prix Unitaire:
 													{{item.product.prix}}
 												</span>
@@ -54,7 +54,7 @@
 											<h5 class="mb-0">$499.00</h5>
 										</div>
 										<div class="col-md-1 col-lg-1 col-xl-1 text-end">
-											<a href="#!" class="text-secondary">
+											<a href="{{path('remove_item', {id:item.product.id})}}" class="text-secondary">
 												<i class="bi bi-trash3" style="font-size: 1.5rem; color: gray;"></i>
 											</a>
 										</div>
@@ -87,7 +87,7 @@
 
 		<div class="text-center mt-5">
 			<div>
-				<i class="bi bi-binoculars-fill text-info" style="font-size: 2rem;"></i>
+				<i class="bi bi-binoculars-fill " style="font-size: 1.3rem;"></i>
 			</div>
 			<br><br><br>
 			<div>
