@@ -10,18 +10,18 @@
 			Tous les Produits
 		</h3>
 
+
 		<nav>
 			<div class="nav nav-tabs" id="nav-tab" role="tablist">
 				<a href="{{path('product_home')}}" class="nav-link active text-info" id="nav-product-tab" data-bs-toggle="tab" data-bs-target="#nav-product" type="button" role="tab" aria-controls="nav-product" aria-selected="true">All Products</a>
-				<a href="{{path('show_product_by_category', {'id': 10} )}}" class="nav-link text-info" id="nav-Legumes-tab" data-bs-toggle="tab" data-bs-target="#nav-Legumes" type="button" role="tab" aria-controls="nav-Legumes" aria-selected="true">Legumes</a>
-				<a href="{{path('show_product_by_category', {'id': 11} )}}" class="nav-link text-info" id="nav-Epicerie-tab" data-bs-toggle="tab" data-bs-target="#nav-Epicerie" type="button" role="tab" aria-controls="nav-Epicerie" aria-selected="false">Epicerie</a>
-				<a href="{{path('show_product_by_category', {'id': 12} )}}" class="nav-link text-info" id="nav-fruits-tab" data-bs-toggle="tab" data-bs-target="#nav-fruits" type="button" role="tab" aria-controls="nav-fruits" aria-selected="false">Fruits</a>
-				<a href="{{path('show_product_by_category', {'id': 13} )}}" class="nav-link text-info" id="nav-boissons-tab" data-bs-toggle="tab" data-bs-target="#nav-boissons" type="button" role="tab" aria-controls="nav-boissons" aria-selected="false">Boissons</a>
+				{% for category in categories %}
+					<a href="{{path('show_product_by_category', {'id': category.id} )}}" class="nav-link text-info" id="nav-{{ category.nom }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ category.nom }}" type="button" role="tab" aria-controls="nav-{{ category.nom }}" aria-selected="true">{{ category.nom }}</a>
+
+				{% endfor %}
 			</div>
 		</nav>
 
 		<div class="tab-content mt-5" id="nav-tabContent">
-
 			<div class="tab-pane fade show active" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
 				<div class="d-flex flex-wrap">
 					{% for product in products %}
@@ -42,89 +42,27 @@
 				</div>
 			</div>
 
-			<div class="tab-pane fade" id="nav-Legumes" role="tabpanel" aria-labelledby="nav-Legumes-tab">
-				<div class="d-flex flex-wrap">
-					{% for product in products %}
-						<div class="col g-1 mb-3">
-							<div class="card shadow-sm" style="width: 18rem;">
-								<div class"text-center">
-									<img src="{{ product.image }}" class="mt-3" width="150px" height="auto" alt="Product Photo">
-								</div>
-								<div class="card-body">
-									<h5 class="card-title fw-bolder">{{ product.nom }}</h5>
-									<p class="card-text fw-bolder text-info">{{ product.Prix }}</p>
-									<a href="{{path('app_product_show', {'id': product.id} )}}" class="btn btn-sm btn-outline-danger">Découvrez</a>
-									<a href="#" class="btn btn-sm btn-outline-info">Ajouter au Panier</a>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="tab-pane fade" id="nav-Epicerie" role="tabpanel" aria-labelledby="nav-Epicerie-tab">
-				<div class="d-flex flex-wrap">
-
-					{% for product in products %}
-						<div class="col g-1 mb-3">
-							<div class="card shadow-sm" style="width: 18rem;">
-								<div class"text-center">
-									<img src="{{ product.image }}" class="mt-3" width="150px" height="auto" alt="Product Photo">
-								</div>
-								<div class="card-body">
-									<h5 class="card-title fw-bolder">{{ product.nom }}</h5>
-									<p class="card-text fw-bolder text-info">{{ product.Prix }}</p>
-									<a href="{{path('app_product_show', {'id': product.id} )}}" class="btn btn-sm btn-outline-danger">Découvrez</a>
-									<a href="#" class="btn btn-sm btn-outline-info">Ajouter au Panier</a>
+			{% for category in categories %}
+				<div class="tab-pane fade" id="nav-{{ category.nom }}" role="tabpanel" aria-labelledby="nav-{{ category.nom }}-tab">
+					<div class="d-flex flex-wrap">
+						{% for product in products %}
+							<div class="col g-1 mb-3">
+								<div class="card shadow-sm" style="width: 18rem;">
+									<div class"text-center">
+										<img src="{{ product.image }}" class="mt-3" width="150px" height="auto" alt="Product Photo">
+									</div>
+									<div class="card-body">
+										<h5 class="card-title fw-bolder">{{ product.nom }}</h5>
+										<p class="card-text fw-bolder text-info">{{ product.Prix }}</p>
+										<a href="{{path('app_product_show', {'id': product.id} )}}" class="btn btn-sm btn-outline-danger">Découvrez</a>
+										<a href="#" class="btn btn-sm btn-outline-info">Ajouter au Panier</a>
+									</div>
 								</div>
 							</div>
-						</div>
-					{% endfor %}
+						{% endfor %}
+					</div>
 				</div>
-			</div>
-
-			<div class="tab-pane fade" id="nav-fruits" role="tabpanel" aria-labelledby="nav-fruits-tab">
-				<div class="d-flex flex-wrap">
-
-					{% for product in products %}
-						<div class="col g-1 mb-3">
-							<div class="card shadow-sm" style="width: 18rem;">
-								<div class"text-center">
-									<img src="{{ product.image }}" class="mt-3" width="150px" height="auto" alt="Product Photo">
-								</div>
-								<div class="card-body">
-									<h5 class="card-title fw-bolder">{{ product.nom }}</h5>
-									<p class="card-text fw-bolder text-info">{{ product.Prix }}</p>
-									<a href="{{path('app_product_show', {'id': product.id} )}}" class="btn btn-sm btn-outline-danger">Découvrez</a>
-									<a href="#" class="btn btn-sm btn-outline-info">Ajouter au Panier</a>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-			<div class="tab-pane fade" id="nav-boissons" role="tabpanel" aria-labelledby="nav-boissons-tab">
-				<div class="d-flex flex-wrap">
-
-					{% for product in products %}
-						<div class="col g-1 mb-3">
-							<div class="card shadow-sm" style="width: 18rem;">
-								<div class"text-center">
-									<img src="{{ product.image }}" class="mt-3" width="150px" height="auto" alt="Product Photo">
-								</div>
-								<div class="card-body">
-									<h5 class="card-title fw-bolder">{{ product.nom }}</h5>
-									<p class="card-text fw-bolder text-info">{{ product.Prix }}</p>
-									<a href="{{path('app_product_show', {'id': product.id} )}}" class="btn btn-sm btn-outline-danger">Découvrez</a>
-									<a href="#" class="btn btn-sm btn-outline-info">Ajouter au Panier</a>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
+			{% endfor %}
 		</div>
-
-
 	</div>
 {% endblock %}

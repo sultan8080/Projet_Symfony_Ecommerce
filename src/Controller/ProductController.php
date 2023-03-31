@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Entity\Category;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +17,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     #[Route('/', name: 'product_home', methods: ['GET'])]
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository, CategoryRepository $categoryRepository): Response
     {
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
         ]);
     }
 
@@ -80,13 +82,15 @@ class ProductController extends AbstractController
 
 
     #[Route('/product/category/{id}', name: 'show_product_by_category', methods: ['GET'])]
-    public function showProducts(ManagerRegistry $doctrine, int $id): Response
+    public function showProducts(ManagerRegistry $doctrine, int $id, Category $category, CategoryRepository $categoryRepository): Response
     {
 
         $category = $doctrine->getRepository(Category::class)->find($id);
 
         return $this->render('product/index.html.twig', [
             'products' => $category->getProducts(),
+            'categories' => $categoryRepository->findAll(),
+
         ]);
 
         // ...
