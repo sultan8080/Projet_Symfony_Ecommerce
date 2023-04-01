@@ -20,14 +20,14 @@
 
 						<h3 class"m-5">
 							PRIX :
-							{{ product.Prix }}
-							EURO</h3>
+							{{ product.Prix|number_format(2, ',', '.')}}
+							€</h3>
 
 						<br><br>
 						<br>
 
 						<a href="{{ path('product_home') }}" class=" btn btn-lg btn-outline-danger">Retour à la liste</a>
-						<a href="#" class="btn btn-lg btn-info">Ajouter au Panier</a>
+						<a href="{{path('mon_panier', {'id': product.id})}}" class="btn btn-lg btn-info">Ajouter au Panier</a>
 
 					</div>
 				</div>

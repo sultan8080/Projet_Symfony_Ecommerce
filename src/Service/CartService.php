@@ -17,8 +17,6 @@ class CartService
         $this->em = $em;
     }
 
-
-
     public function addToCart(int $id): void
     {
         $card = $this->requestStack->getSession()->get('cart', []);
@@ -50,7 +48,6 @@ class CartService
                 $cartData[] = [
                     'product' => $product,
                     'quantity' => $quantity
-
                 ];
             }
         }

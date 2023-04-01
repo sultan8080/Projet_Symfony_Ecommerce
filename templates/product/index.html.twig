@@ -30,7 +30,7 @@
 								</div>
 								<div class="card-body">
 									<h5 class="card-title fw-bolder">{{ product.nom }}</h5>
-									<p class="card-text fw-bolder text-info">{{ product.Prix }}</p>
+									<p class="card-text fw-bolder text-info">{{ product.Prix|number_format(2, ',', '.')}}€</p>
 									<a href="{{path('app_product_show', {'id': product.id} )}}" class="btn btn-sm btn-outline-danger">Découvrez</a>
 									<a href="{{path('mon_panier', {'id': product.id})}}" class="btn btn-sm btn-outline-info">Ajouter au Panier</a>
 								</div>
@@ -51,7 +51,7 @@
 									</div>
 									<div class="card-body">
 										<h5 class="card-title fw-bolder">{{ product.nom }}</h5>
-										<p class="card-text fw-bolder text-info">{{ product.Prix }}</p>
+										<p class="card-text fw-bolder text-info">{{ product.Prix|number_format(2, ',', '.')}}€</p>
 										<a href="{{path('app_product_show', {'id': product.id} )}}" class="btn btn-sm btn-outline-danger">Découvrez</a>
 										<a href="{{path('mon_panier', {'id': product.id})}}" class="btn btn-sm btn-outline-info">Ajouter au Panier</a>
 									</div>

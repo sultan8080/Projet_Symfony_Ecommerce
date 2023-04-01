@@ -12,13 +12,26 @@
 				<div class="row bg-light d-flex justify-content-center align-items-center h-100">
 					<div class="col-10">
 
-						<div class=" mt-3 mb-4">
-							<h3 class="fw-bold mb-0 text-info text-center">Mon Panier</h3>
-
+						<div class=" mt-4 mb-4">
+							<h3 class="fw-bold mb-0 text-info text-end">Mon Panier</h3>
 						</div>
-						{% for item in cart %}
+						<p class="h6 mb-0 mt-3 text-end">Souhaitez-vous ajouter d'autre produits? &nbsp
+							<a href="{{path('product_home')}}" class="btn btn-sm btn-outline-info">
+								Voir les listes
+							</a>
+						</p>
 
-							<div class=" rounded-3 mb-4">
+
+						{% set itemtotalPrix = null %}
+						{% set grandTotal = null %}
+						{% set quantityTotal = null %}
+
+						{% for item in cart %}
+							{% set itemtotalPrix = item.product.prix * item.quantity %}
+							{% set grandTotal = grandTotal + itemtotalPrix %}
+							{% set quantityTotal = quantityTotal + item.quantity %}
+
+							<div class=" rounded-3">
 								<div class="card-body p-4">
 									<div class="row d-flex justify-content-between align-items-center">
 										<div class="col-md-2 col-lg-2 col-xl-2">
@@ -28,7 +41,7 @@
 											<p class="lead fw-normal mb-2">{{item.product.nom}}</p>
 											<p>
 												{# <span class="text-muted">{{item.product.sousTitre}}
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	</span> #}
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									</span> #}
 												<span class="text-muted">Prix Unitaire:
 													{{item.product.prix}}
 												</span>
@@ -43,7 +56,7 @@
 												<i class="bi bi-dash-square-fill text-secondary" style="font-size: 1.2rem;"></i>
 											</a>
 
-											<input value="5" type="number" class="form-control" readonly/>
+											<input value="{{item.quantity}}" type="number" class="form-control" readonly/>
 
 											<a href="" class="btn btn-link px-2">
 
@@ -51,7 +64,10 @@
 											</a>
 										</div>
 										<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 ">
-											<h5 class="mb-0">$499.00</h5>
+											<h5 class="mb-0">
+												{{(itemtotalPrix)|number_format(2, ',', '.')}}
+												€
+											</h5>
 										</div>
 										<div class="col-md-1 col-lg-1 col-xl-1 text-end">
 											<a href="{{path('remove_item', {id:item.product.id})}}" class="text-secondary">
@@ -65,19 +81,28 @@
 
 						{% endfor %}
 
-						<div class="card-body p-4 text-end mb-3">
-							<h3 class="">
-								PRIX TOTALE:
-								<span class="fw-bold">150,00 €
-								</span>
-							</h3>
+						<div class=" mb-3">
+							<div class="d-flex justify-content-between mx-3 mb-3">
+								<p class="text-secondary">
+									Produits Totale: &nbsp
+									<span class="fw-bold">{{cart|length}}
+									</span>
+								</p>
+								<p class="text-secondary">
+									Quantité totale: &nbsp
+									<span class="fw-bold">{{quantityTotal}}
+									</span>
+								</p>
+								<p>
+									PRIX TOTALE :
+									<span class="fw-bold h4">
+										{{grandTotal|number_format(2, ',', '.')}}€</span>
+								</p>
+							</div>
+							<div class="text-end">
+								<a type="button" class="btn btn-info w-50">Valider mon panier</a>
+							</div>
 						</div>
-
-
-						<div class="card-body text-end mb-3">
-							<button type="button" class="btn btn-info w-50">Proceed to Pay</button>
-						</div>
-
 					</div>
 				</div>
 			</div>
