@@ -25,9 +25,23 @@ class CartService
         } else {
             $card[$id] = 1;
         }
+        $this->getSession()->set('cart', $card);
+    }
+
+    public function decreaseQuantityFromCart(int $id): void
+    {
+        $card = $this->requestStack->getSession()->get('cart', []);
+        if ($card[$id] > 1) {
+            $card[$id]--;
+        } else {
+            $card[$id] = 0;
+            // unset($cart[$id]);
+        }
 
         $this->getSession()->set('cart', $card);
     }
+
+
 
     public  function removeCart()
     {

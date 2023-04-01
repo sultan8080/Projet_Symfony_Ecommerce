@@ -9,7 +9,7 @@
 		<div class="card mb-3">
 			<div class="row g-0">
 				<div class="col-md-4">
-					<img src="{{ product.image }}" class="img-fluid" alt="Product Photo">
+					<img src="{{asset('uploads/images/products/'~ product.image ~'')}}" class=" img-fluid" alt=" product photo">
 				</div>
 				<div class="col-md-8">
 					<div class="card-body">
@@ -22,12 +22,10 @@
 							PRIX :
 							{{ product.Prix|number_format(2, ',', '.')}}
 							€</h3>
-
 						<br><br>
 						<br>
-
-						<a href="{{ path('product_home') }}" class=" btn btn-lg btn-outline-danger">Retour à la liste</a>
-						<a href="{{path('mon_panier', {'id': product.id})}}" class="btn btn-lg btn-info">Ajouter au Panier</a>
+						<a href="{{ path('product_home') }}" class=" btn btn-lg btn-outline-info">Retour à la liste</a>
+						<a href="{{path('addTo_panier', {'id': product.id})}}" class="btn btn-lg btn-info">Ajouter au Panier</a>
 
 					</div>
 				</div>
