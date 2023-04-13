@@ -7,9 +7,9 @@
 
 	{# {{dump(cart)}} #}
 	{% if cart|length>0 %}
-		<section class="h-100" style="margin-top :-8px">
-			<div class="container h-100 pt-2">
-				<div class="row bg-light d-flex justify-content-center align-items-center h-100">
+		<section class="h-100 mt-5">
+			<div class="container bg-light h-100 shadow-lg">
+				<div class="row  p-5  d-flex justify-content-center align-items-center h-100">
 					<div class="col-10">
 
 						<div class=" mt-4 mb-4">
@@ -23,11 +23,10 @@
 							</a>
 						</p>
 
+						{# {% set itemtotalPrix = null %} #}
 
-						{% set itemtotalPrix = null %}
 						{% set grandTotal = null %}
 						{% set quantityTotal = null %}
-
 						{% for item in cart %}
 							{% set itemtotalPrix = item.product.prix * item.quantity %}
 							{% set grandTotal = grandTotal + itemtotalPrix %}
@@ -37,7 +36,7 @@
 								<div class="card-body p-4">
 									<div class="row d-flex justify-content-between align-items-center">
 										<div class="col-md-2 col-lg-2 col-xl-2">
-											<img src="{{item.product.image}}" class="img-fluid rounded-3" alt="Cotton T-shirt">
+											<img src="{{asset('uploads/images/products/'~ item.product.image ~'')}}" class="img-fluid rounded-3" alt="Cotton T-shirt">
 										</div>
 										<div class="col-md-3 col-lg-3 col-xl-3">
 											<p class="lead fw-normal mb-2">{{item.product.nom}}</p>
@@ -63,7 +62,7 @@
 								</div>
 								<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 ">
 									<h5 class="mb-0">
-										{{(itemtotalPrix)|number_format(2, ',', '.')}}
+										{{(itemtotalPrix)|number_format(2, ',', ',')}}
 										€
 									</h5>
 								</div>
@@ -91,10 +90,10 @@
 							<span class="fw-bold">{{quantityTotal}}
 							</span>
 						</p>
-						<p>
+						<p class="bg-warning px-3 py-1">
 							PRIX TOTALE :
 							<span class="fw-bold h4">
-								{{grandTotal|number_format(2, ',', '.')}}€</span>
+								{{grandTotal|number_format(2, ',', ',')}}€</span>
 						</p>
 					</div>
 

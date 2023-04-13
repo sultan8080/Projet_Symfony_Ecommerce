@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
-
+use App\Service\CartService;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\Admin\ProductCrudController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,17 +16,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
-class DashboardController extends AbstractDashboardController
+class DashboardControllerUser extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'app_dashboard_Admin')]
+    #[Route('/user', name: 'app_dashboard_user')]
     public function index(): Response
     {
         // return parent::index();
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
-        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
+        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        // return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //
@@ -37,7 +37,7 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
-        // return $this->render('some/path/my-dashboard.html.twig');
+        return $this->render('user/index.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -51,21 +51,10 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToDashboard('User', 'fa fa-home');
         // yield MenuItem::linkToCrud('Product', 'fa-solid fa-basket-shopping', Product::class);
 
-        yield MenuItem::section('User');
-        yield MenuItem::linkToCrud('All User', 'fa-solid fa-users', User::class);
+        // yield MenuItem::section('User');
+        // yield MenuItem::linkToCrud('All User', 'fa-solid fa-users', User::class);
 
-        yield MenuItem::section('Product');
-
-        yield MenuItem::subMenu('Product', 'fa-solid fa-basket-shopping')->setSubItems([
-            MenuItem::linkToCrud('Add Product', 'fas fa-plus', Product::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Show Product', 'fas fa-eye', Product::class)
-        ]);
-
-        yield MenuItem::section('Category');
-
-        yield MenuItem::subMenu('Category', 'fa-solid fa-shop')->setSubItems([
-            MenuItem::linkToCrud('Add Category', 'fas fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Show Category', 'fas fa-eye', Category::class)
-        ]);
+        yield MenuItem::section('Mon Panier');
+        yield MenuItem::linkToCrud('Mon Panier', 'fa-solid fa-users', User::class);
     }
 }

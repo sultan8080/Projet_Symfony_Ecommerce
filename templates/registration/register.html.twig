@@ -18,5 +18,12 @@
 
 		<button type="submit" class="btn btn-info w-100 text-white">Enregistrer</button>
 		{{ form_end(registrationForm) }}
+
+		<p class="h6 mb-0 mt-3 text-center">
+			Vous avez déjà un compte? &nbsp
+			<a href="{{path('app_login')}}" class="text-info">
+				Connecter-vous
+			</a>
+		</p>
 	</div>
 {% endblock %}

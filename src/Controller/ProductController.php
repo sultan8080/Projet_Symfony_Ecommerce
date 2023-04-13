@@ -44,7 +44,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
+    #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
         return $this->render('product/show.html.twig', [
@@ -52,7 +52,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
+    #[Route('/product/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
     {
         $form = $this->createForm(ProductType::class, $product);
@@ -70,7 +70,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
+    #[Route('/product/{id}/delete', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {

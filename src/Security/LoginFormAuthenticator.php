@@ -45,10 +45,16 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+        if (in_array('ROLE_ADMIN', $token->getUser()->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('app_dashboard_Admin'));
+        }
+        if (in_array('ROLE_USER', $token->getUser()->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('app_dashboard_user'));
+        }
 
         // For example:
-        // return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        // return new RedirectResponse($this->urlGenerator->generate('app_dashboard_Admin'));
+        throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);
     }
 
     protected function getLoginUrl(Request $request): string
