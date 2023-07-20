@@ -21,7 +21,7 @@ class ProductFixtures extends Fixture
         for ($i = 0; $i < 50; $i++) {
             $product = new Product();
             $product->setNom($faker->words(2, true));
-            $product->setPrix($faker->randomFloat(2, 100, 999));
+            $product->setPrix($faker->randomFloat(2, 6, 9));
             $product->setSlug($faker->slug());
             $product->setCreatedAt($faker->dateTime());
             $product->setOnline(true);
