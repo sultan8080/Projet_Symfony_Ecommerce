@@ -26,7 +26,7 @@ class ProductFixtures extends Fixture
             $product->setCreatedAt($faker->dateTime());
             $product->setOnline(true);
             $product->setImage($faker->randomElement($imagess));
-            $product->setDescription($faker->text(100));
+            $product->setDescription($faker->text(500));
             $product->setSousTitre($faker->sentence());
             $product->setCategory($this->getReference('category-' . $faker->numberBetween(1, 4)));
             $manager->persist($product);

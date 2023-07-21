@@ -24,19 +24,19 @@ class UserFixtures extends Fixture
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 1; $i < 6; $i++) {
             $user = new User();
             $user->setNom($faker->word);
-            $user->setEmail($faker->email);
+            $user->setEmail('user-'.$i.'@ecommerce.fr');
             $user->setPassword($this->userPasswordHasher->hashPassword($user, '123456'));
             $user->setRoles(['ROLE_USER']);
             $manager->persist($user);
         }
 
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             $admin = new User();
             $admin->setNom($faker->word);
-            $admin->setEmail($faker->email);
+            $admin->setEmail('admin-'.$i.'@ecommerce.fr');
             $admin->setPassword($this->userPasswordHasher->hashPassword($admin, '123456'));
             $admin->setRoles(['ROLE_ADMIN']);
             $manager->persist($admin);
