@@ -1,0 +1,15 @@
+.dropdown-toggle::after {
+    content: none !important;
+  }
+
+  .cardShadow {
+    box-shadow:  0.150rem 0.150rem 0.55rem rgba(207, 197, 57, 0.5); /* Use rgba() for the color */
+  }
+
+  .cardBorder {
+    border: .5px solid #CFC539;; /* Change the color and weight here */
+  }
+
+.topHeader{
+    padding: 1px 0 1px 0;
+}
