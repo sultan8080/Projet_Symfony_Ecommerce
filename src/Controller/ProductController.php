@@ -16,8 +16,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 // #[Route('/')]
 class ProductController extends AbstractController
 {
-    #[Route('/', name: 'product_home', methods: ['GET'])]
-    public function index(ProductRepository $productRepository, CategoryRepository $categoryRepository): Response
+    #[Route('/', name: 'home', methods: ['GET'])]
+    public function homePage(ProductRepository $productRepository, CategoryRepository $categoryRepository): Response
+    {
+        return $this->render('home.html.twig', [
+            'products' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/all-products', name: 'product_home', methods: ['GET'])]
+    public function allProducts(ProductRepository $productRepository, CategoryRepository $categoryRepository): Response
     {
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
