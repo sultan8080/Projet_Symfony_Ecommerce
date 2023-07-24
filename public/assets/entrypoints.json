@@ -3,6 +3,7 @@
     "app": {
       "js": [
         "/assets/runtime.js",
+        "/assets/vendors-node_modules_core-js_modules_es_array_for-each_js-node_modules_core-js_modules_es_obj-7bb33f.js",
         "/assets/app.js"
       ],
       "css": [
