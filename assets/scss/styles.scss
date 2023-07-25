@@ -16,18 +16,30 @@
 .imgWidth {
   width: 260px;
 }
+.textHeading{
+  font-size: 2.5rem;
+}
 
 @media screen and (max-width: 992px) {
   .imgWidth {
     width: 200px;
   }
+  .textHeading{
+    font-size: 1.7rem;
+  }
 }
 
-/* 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+    .textHeading{
+    font-size: 1.5rem;
+  }
+}
 
- }
 
- @media (max-width: 480px) {
+// @media screen and (max-width: 480px) {
+//   .textHeading{
+//   font-size: .9rem;
+// }
+// }
 
-} */
+
