@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends AbstractController
 {
@@ -21,12 +22,21 @@ class CartController extends AbstractController
     }
 
     #[Route('/mon-panier/{id<\d+>}', name: 'addTo_panier')]
-    public function addItem(CartService $cartService, int $id): RedirectResponse
+    public function addItem(CartService $cartService, int $id, Request $request): RedirectResponse
     {
         $cartService->addToCart($id);
         $this->addFlash('success', 'Produit a bien été ajoutée');
-        return $this->redirectToRoute("product_home");
+
+        // Redirect back to the referer page (where the user clicked "Add to Cart").
+        return $this->redirect($request->headers->get('referer'));
     }
+
+    // public function addItem(CartService $cartService, int $id): RedirectResponse
+    // {
+    //     $cartService->addToCart($id);
+    //     $this->addFlash('success', 'Produit a bien été ajoutée');
+    //     return $this->redirectToRoute("home");
+    // }
 
     #[Route('/mon-panier/remove/{id<\d+>}', name: 'remove_item')]
     public function removeItem(CartService $cartService, int $id): RedirectResponse
