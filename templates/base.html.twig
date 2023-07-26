@@ -65,11 +65,16 @@
 					</button>
 				</form>
 				<div class="d-flex">
-					<div class="ms-2">
-						<a class="btn btn-outline-info" href="{{path('panier_card')}}">
+					<div class="ms-2 position-relative">
+						<a class="btn btn-outline-info" href="{{ path('panier_card') }}">
 							<i class="bi bi-cart h5"></i>
 						</a>
+						{% set cartItemCount = cartService.getCartItemCount() %}
+						{% if cartItemCount > 0 %}
+							<span class="badge bg-danger position-absolute top-0 start-50 translate-middle">{{ cartItemCount }}</span>
+						{% endif %}
 					</div>
+
 					<div class="dropdown ms-2 ">
 						{% if app.user %}
 							<button class="btn btn-outline-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

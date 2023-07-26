@@ -27,6 +27,12 @@ class CartService
         }
         $this->getSession()->set('cart', $card);
     }
+    
+    public function getCartItemCount(): int
+    {
+        $cart = $this->requestStack->getSession()->get('cart', []);
+        return array_sum($cart);
+    }
 
     public function decreaseQuantityFromCart(int $id): void
     {
