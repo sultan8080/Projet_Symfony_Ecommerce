@@ -1,8 +1,8 @@
-# LA MONTÉE EN COMPETENCES: Application E-Commerce responsive
+# Projet: E-Commerce Responsive
 Il s’agit de créer une application classique type E-Commerce, avec des listes de
 produits, détails produit, gestion de panier et validation de celui-ci. Avec
 également une gestion simple du compte utilisateur.
-Outils utilisée: Symfony 5,4, composer, data-fixtures, php-faker, bootstrap, web-pack
+Outils utilisée: Symfony 5,4, composer, data-fixtures,Easyadmin,  php-faker, bootstrap, web-pack, yarn
 
 # Besoin :
 • Page d’accueil avec la Liste produits.
@@ -21,7 +21,9 @@ Outils utilisée: Symfony 5,4, composer, data-fixtures, php-faker, bootstrap, we
 
 ## Screenshots
 
-![Screenshot 1](./screenshots/products.png)
-![Screenshot 2](./screenshots/Panier.png)
-![Screenshot 3](./screenshots/EmptyPanier.png)
-![Screenshot 4](./screenshots/registration.png)
+![Home_LG_Screen](./screenshots/Home.png)
+![Home - iPad](./screenshots/HomeIpad.png)
+![Home - Mobile](./screenshots/HomeMobile.png)
+![Home Middle](./screenshots/Home_2.png)
+![Shopping Cart](./screenshots/Panier.png)
+![Products](./screenshots/products.png)
